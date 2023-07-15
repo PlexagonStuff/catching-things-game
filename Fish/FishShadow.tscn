@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Fish/fishshadow.png" type="Texture" id=1]
+[ext_resource path="res://Fish/FishShadow.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Leave"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fishshadow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fishshadow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="FishShadow" type="KinematicBody2D"]
+position = Vector2( -0.105456, 0.15625 )
+script = ExtResource( 2 )
+
+[node name="Fishshadow" type="Sprite" parent="."]
+position = Vector2( -15.3967, 0.0936396 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 2
+frame = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0.0281195, 0.0505864 )
+rotation = -1.5708
+scale = Vector2( 8, 2 )
+enabled = true
+cast_to = Vector2( 0, 100 )
+collision_mask = 32
+collide_with_areas = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CatchPhaseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Leave = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="CatchPhaseTimer" to="." method="_on_CatchPhaseTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
