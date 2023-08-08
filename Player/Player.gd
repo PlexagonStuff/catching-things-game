@@ -8,6 +8,9 @@ var velocity = Vector2.ZERO
 var touchingWater = true
 enum State {Catching,Fishing}
 var currentState = State.Catching
+
+var catchAnimation = false
+
 onready var bugArea = $NetArea/CollisionShape2D
 onready var fishArea = $FishingArea/CollisionShape2D
 var casted = false
@@ -19,22 +22,31 @@ var fishBobber
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	global_position = Global.playerPosition
+	CameraData.connect("changeCameraState",self,"beHappy") # Replace with function body.
+	InventoryData.connect("hideInventory",self,"beNormal")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func beHappy(cameraState):
+	print("Don't worry, be happy")
+	catchAnimation = true
+	$AnimationPlayer.play("Catch")
+	
+func beNormal():
+	catchAnimation = false
 
 func _physics_process(delta):
 	Global.playerPosition = global_position
 	var input_vector = Vector2.ZERO
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up","ui_down")
 	velocity = velocity.move_toward(input_vector * SPEED, ACCELERATION * delta)
-	if (velocity != Vector2.ZERO):
-		$AnimationPlayer.play("Walk")
-	else:
-		$AnimationPlayer.play("Idle")
+	if catchAnimation == false:
+		if (velocity != Vector2.ZERO):
+			$AnimationPlayer.play("Walk")
+		else:
+			$AnimationPlayer.play("Idle")
 	if (currentState == State.Fishing && casted == true && touchingWater == true):
 		velocity = Vector2.ZERO
 	velocity = move_and_slide(velocity)

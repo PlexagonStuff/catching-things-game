@@ -20,12 +20,12 @@ func _ready():
 
 
 func _on_PlayerDetectionArea_area_entered(area):
-	if (rng.randi_range(1,1) == 1):
+	if (rng.randi_range(1,3) == 1):
 		spawn_butterfly()
 		
 		
 func spawn_butterfly():
-	var butterflyNumber = rng.randi_range(19,19)
+	var butterflyNumber = rng.randi_range(1,20)
 	var butterfly = butterflyPreload.instance()
 	butterflySpawnID = ButterflyData.bugSpawnedNumber
 	butterfly.origin_point = global_position

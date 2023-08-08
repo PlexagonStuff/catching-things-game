@@ -31,6 +31,7 @@ func _ready():
 	speed = butterflySpawnData["speed"]
 	acceleration = butterflySpawnData["acceleration"]
 	butterflyState = "Flies"
+	$ButterflySprite.frame = butterflyID-1
 	var point = Vector2(rng.randi_range(-200,200),rng.randi_range(-200,200))
 	target_point = Vector2((origin_point.x + point.x), (origin_point.y + point.y)) # Replace with function body.
 

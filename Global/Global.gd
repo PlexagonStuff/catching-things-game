@@ -8,9 +8,34 @@ var playerPosition = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	InventoryData.connect("hideInventory",self,"save") # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	OS.set_window_title("Catching Things Game" + " | FPS: " + str(Engine.get_frames_per_second()))
+
+func save():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.WRITE)
+	var data = {}
+	data["inventory"] = InventoryData.inventory
+	data["fishCaught"] = FishData.caughtFish
+	data["butterfliesCaught"] = ButterflyData.caughtButterflys
+	data["playerPositionX"] = playerPosition.x
+	data["playerPositionY"] = playerPosition.y
+	save_game.store_line(to_json(data))
+	save_game.close()
+	
+func loading():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.READ)
+	var data = JSON.parse(save_game.get_as_text()).result
+	playerPosition = Vector2(data["playerPositionX"],data["playerPositionY"])
+	InventoryData.inventory = data["inventory"]
+	FishData.caughtFish = data["fishCaught"]
+	ButterflyData.caughtButterflys = data["butterfliesCaught"]
+	save_game.close()
+	get_tree().change_scene("res://World.tscn")
+	
+

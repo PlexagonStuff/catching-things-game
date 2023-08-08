@@ -2,6 +2,8 @@ extends StaticBody2D
 
 var fishID
 
+var fishCatalogID
+
 var fishCatchable = false
 # Declare member variables here. Examples:
 # var a = 2
@@ -15,8 +17,10 @@ func _ready():
 	FishData.connect("onBobber",self,"fishOnBobber")
 	FishData.connect("deleteBobber",self,"delete")
 	
-func fishRegister(id):
-	fishID = id 
+func fishRegister(id, catalogID):
+	fishID = id
+	fishCatalogID = catalogID
+	FishData.fishOnBobber = true
 
 func delete():
 	FishData.emit_signal("bobberLeft",fishID)
@@ -25,7 +29,7 @@ func delete():
 func fishOnBobber(id):
 	$Label.visible = true
 	fishCatchable = true
-	$TimeToCatchFishTimer.start()
+	$TimeToCatchFishTimer.start(FishData.fishStats[str(fishCatalogID)]["catchTime"])
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -33,7 +37,7 @@ func fishOnBobber(id):
 func _physics_process(delta):
 	if Input.is_action_just_pressed("mainButton"):
 		if fishCatchable == true:
-			FishData.emit_signal("catch",fishID)
+			FishData.emit_signal("catch",fishID, fishCatalogID)
 
 
 func _on_TimeToCatchFishTimer_timeout():

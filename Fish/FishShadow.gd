@@ -33,9 +33,9 @@ func _ready():
 	#print(navagent.get_target_location())
 
 func _physics_process(delta):
-	if $RayCast2D.is_colliding() && currentState == State.Swimming:
+	if $RayCast2D.is_colliding() && currentState == State.Swimming && FishData.fishOnBobber == false:
 		currentState = State.CatchProcess
-		FishData.emit_signal("registerFish",id)
+		FishData.emit_signal("registerFish",id, catalogID)
 		bobberPoint = $RayCast2D.get_collision_point()
 		catch_process()
 	if (currentState == State.Swimming):
@@ -82,12 +82,13 @@ func _on_CatchPhaseTimer_timeout():
 func leave(fishID):
 	if (fishID == id):
 		$AnimationPlayer.play("Leave")
+		FishData.fishOnBobber = false
 		
 func despawned(fishID):
 	if (fishID == id):
 		queue_free()
 		
-func caught(id):#, catalogID):
+func caught(id, catalogID):
 	print("You caught a thing!")
 	CameraData.emit_signal("changeCameraState", CameraData.ZOOMONPLAYER)
 	queue_free()

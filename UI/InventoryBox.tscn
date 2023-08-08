@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Butterflies/butterflieswithouttemplates.png" type="Texture" id=1]
+[ext_resource path="res://UI/InventoryBox.gd" type="Script" id=2]
+
+[node name="InventoryBox" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ButterflyIcon" type="Sprite" parent="."]
+position = Vector2( -4.76837e-07, -4.76837e-07 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+hframes = 20
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 5.0
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_TextureButton_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

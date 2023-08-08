@@ -1,25 +1,10 @@
 extends Node2D
 
-signal onBobber
-signal bobberLeft
-signal deleteBobber
-signal leave
-signal catch
-signal registerFish
-signal spawn
-signal despawn
 
-var fishOnBobber = false
-
-var fishSpawnedNumber = 1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var caughtFish = []
 
-var fishStats = {
-	"19":{"name":"Sturgeon", "catchTime":0.5,"size":5}
-}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,3 +14,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+ # Replace with function body.
+
+
+func _on_LoadGame_pressed():
+	Global.loading() # Replace with function body.
+
+
+func _on_NewGame_pressed():
+	get_tree().change_scene("res://World.tscn") # Replace with function body.
