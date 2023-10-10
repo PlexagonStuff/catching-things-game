@@ -11,6 +11,7 @@ var butterflyState = ""
 var butterflyCatchState = ""
 var stopper = 1
 var butterflySpawnData
+var butterflyCatchData
 #These will be sent in by the flower
 var butterflyID
 var speed
@@ -96,7 +97,7 @@ func _on_CatchArea_area_entered(area):
 	catchRing = butterflyCatchRing.instance()
 	catchRing.bugID = uniqueID
 	catchRing.catalogID = butterflyID
-	catchRing.catchData = ButterflyData.butterflyCatchData[str(butterflyID)]
+	catchRing.catchData = butterflyCatchData
 	self.add_child(catchRing)
 
 

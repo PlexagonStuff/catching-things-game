@@ -11,6 +11,14 @@ func _ready():
 	InventoryData.connect("showInventory",self,"renderInventory")
 	
 func renderInventory(mode):
+	for n in get_children():
+		if "InventoryBox" in n.name and n.name != "InventoryBoxPlacer":
+			remove_child(n)
+			n.queue_free()
+	for n in get_children():
+		print(n.name)
+		#remove_child(n)
+		#n.queue_free()
 	$InventoryBoxPlacer.position = Vector2(-81,-27)
 	var id = 0
 	for y in range(2):

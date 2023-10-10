@@ -5,11 +5,21 @@ signal spawn
 signal leave
 signal catch
 
+enum Rarity {Common, Rare, SuperRare, Legendary}
+
 #This is used for a unique idea for each bug, so that signals can be unique
 var bugSpawnedNumber = 1
 
+var common = [1,2,5,6,7,8,9,11,14,18,19]
+
+var rare = [3,4,10,13,15]
+
+var superrare = [12,17,20]
+
+var legendary = [16]
 
 var caughtButterflys = []
+var donateButterflys = []
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -37,7 +47,18 @@ var butterflyStats = {
 }
 #Min scale is 0.3
 var butterflyCatchData = {
-	"1":{"catchScale":1.2, "ringSpeed":1, "cycles":3},
+	#Common
+	"Common":{"catchScale":1.2, "ringSpeed":1, "cycles":3},
+	
+	#Rare
+	"Rare":{"catchScale":1.0, "ringSpeed":1.2, "cycles":3},
+	
+	#Super Rare
+	"SuperRare":{"catchScale":0.8, "ringSpeed":1.5, "cycles":2},
+	
+	#Legendary
+	"Legendary":{"catchScale":0.6, "ringSpeed":2, "cycles":1},
+	
 	"2":{"catchScale":1.2, "ringSpeed":1, "cycles":3},
 	"3":{"catchScale":1, "ringSpeed":1.3, "cycles":2},
 	"4":{"catchScale":0.9, "ringSpeed":1.2, "cycles":2},
@@ -51,7 +72,7 @@ var butterflyCatchData = {
 	"12":{"catchScale":1.2, "ringSpeed":1, "cycles":1},
 	"13":{"catchScale":0.9, "ringSpeed":1.4, "cycles":2},
 	"14":{"catchScale":1.2, "ringSpeed":1, "cycles":3},
-	"15":{"catchScale":1.3, "ringSpeed":1.6, "cycles":2},
+	"15":{"catchScale":1.3, "ringSpeed":1.6, "cycles":2},   
 	"16":{"catchScale":0.7, "ringSpeed":1.6, "cycles":1},
 	"17":{"catchScale":1.2, "ringSpeed":1, "cycles":1},
 	"18":{"catchScale":1.2, "ringSpeed":1, "cycles":3},

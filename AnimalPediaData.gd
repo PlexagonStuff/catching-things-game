@@ -1,26 +1,21 @@
 extends Node2D
 
-signal onBobber
-signal bobberLeft
-signal deleteBobber
-signal leave
-signal catch
-signal registerFish
-signal spawn
-signal despawn
+signal showPedia
+signal hidePedia
+signal showAnimalLayout
 
-var fishOnBobber = false
+enum Tab {Butterfly,Freshwater,Ocean}
 
-var fishSpawnedNumber = 1
+#Use this to store the previous tab after switching to animal details
+var currentState
+
+var open = false
+
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var caughtFish = []
-var donateFish = []
 
-var fishStats = {
-	"19":{"name":"Sturgeon", "catchTime":0.5,"size":5}
-}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shop/ReallyBadShip.png" type="Texture" id=1]
+[ext_resource path="res://Shop/DonateShip.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 16.5 )
+
+[node name="DonateShip" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ReallyBadShip" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="ShopEntrance" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopEntrance"]
+position = Vector2( 4, -10 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="ShopEntrance" to="." method="_on_ShopEntrance_area_entered"]
+[connection signal="area_exited" from="ShopEntrance" to="." method="_on_ShopEntrance_area_exited"]

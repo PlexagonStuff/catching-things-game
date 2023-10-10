@@ -17,21 +17,36 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("inventory"):
-		if InventoryData.normalMode == true:
+		if InventoryData.normalMode == true and $CanvasLayer/AnimalPedia.visible == false:
 			if InventoryData.normalInventoryOpen == false:
 				InventoryData.emit_signal("showInventory",InventoryData.Mode.Normal)
 				InventoryData.normalInventoryOpen = true
 			else:
 				InventoryData.emit_signal("hideInventory")
 				InventoryData.normalInventoryOpen = false
+	if Input.is_action_just_pressed("encyclopedia"):
+		if InventoryData.normalMode == true and InventoryData.inStore == false and $CanvasLayer/Inventory.visible == false:
+			if AnimalPediaData.open == false:
+				AnimalPediaData.emit_signal("showPedia",AnimalPediaData.Tab.Butterfly)
+				$CanvasLayer/AnimalPedia.visible = true
+				AnimalPediaData.open = true
+			else:
+				$CanvasLayer/AnimalPedia.visible = false
+				AnimalPediaData.open = false
+				
 				
 func showInventory(mode):
 	$CanvasLayer/Inventory.visible = true
 	get_tree().paused = true
+	if mode == InventoryData.Mode.Normal:
+		$CanvasLayer/DialogueBox.visible = false
+	if mode == InventoryData.Mode.Release or mode == InventoryData.Mode.Sell or mode == InventoryData.Mode.Donate:
+		$CanvasLayer/DialogueBox.visible = true
 
 func hideInventory():
 	$CanvasLayer/Inventory.visible = false
 	get_tree().paused = false
+	$CanvasLayer/DialogueBox.visible = false
 
 func _physics_process(delta):
 	

@@ -22,6 +22,7 @@ Dialogue="*res://Global/Dialogue.gd"
 CatchManager="*res://Global/CatchManager.gd"
 FishData="*res://Fish/FishData.gd"
 InventoryData="*res://Global/InventoryData.gd"
+AnimalPediaData="*res://AnimalPediaData.gd"
 
 [display]
 
@@ -107,6 +108,12 @@ inventory={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+encyclopedia={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -116,6 +123,7 @@ inventory={
 2d_physics/layer_4="Water"
 2d_physics/layer_5="Ground"
 2d_physics/layer_6="Bobber"
+2d_physics/layer_7="Shop"
 
 [physics]
 

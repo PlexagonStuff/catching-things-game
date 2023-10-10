@@ -13,7 +13,12 @@ func _ready():
 
 
 func onButterflyCatch(butterflyID, catalogID):
-	if (ButterflyData.caughtButterflys.has(catalogID)):
+	var counter = 0
+	for bugs in ButterflyData.caughtButterflys:
+		if bugs == catalogID:
+			counter = counter + 1
+	print_debug(counter)
+	if (counter != 0):
 		Dialogue.emit_signal("sendDialogue", "","I caught the " + ButterflyData.butterflyStats[str(catalogID)]["name"])
 	else:
 		ButterflyData.caughtButterflys.append(catalogID)
@@ -22,7 +27,13 @@ func onButterflyCatch(butterflyID, catalogID):
 	
 		
 func onFishCatch(fishID, catalogID):
-	if (FishData.caughtFish.has(catalogID)):
+	var caughtFish = FishData.caughtFish
+	var counter = 0
+	for fish in caughtFish:
+		if fish == catalogID:
+			counter = counter + 1
+	print_debug(counter)
+	if (counter != 0):
 		Dialogue.emit_signal("sendDialogue", "","I caught the " + FishData.fishStats[str(catalogID)]["name"])
 	else:
 		FishData.caughtFish.append(catalogID)
