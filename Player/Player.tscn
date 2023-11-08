@@ -164,7 +164,7 @@ shape = SubResource( 3 )
 [node name="Tools" type="Sprite" parent="."]
 position = Vector2( 10, 2 )
 texture = ExtResource( 6 )
-hframes = 3
+hframes = 6
 frame = 2
 
 [connection signal="body_entered" from="FishingArea" to="." method="_on_FishingArea_body_entered"]

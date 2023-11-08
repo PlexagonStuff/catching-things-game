@@ -39,4 +39,8 @@ text = "!"
 wait_time = 0.3
 one_shot = true
 
+[node name="Line2D" type="Line2D" parent="."]
+width = 1.25
+default_color = Color( 0, 0, 0, 1 )
+
 [connection signal="timeout" from="TimeToCatchFishTimer" to="." method="_on_TimeToCatchFishTimer_timeout"]

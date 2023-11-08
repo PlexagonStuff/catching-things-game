@@ -4,6 +4,8 @@ onready var FishPreload = load("res://Fish/FishShadow.tscn")
 var rng = RandomNumberGenerator.new()
 
 var fishSpawnID
+#0 is basic function, 1 is when spawned by fish bait
+export var mode = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -11,7 +13,9 @@ var fishSpawnID
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rng.randomize() # Replace with function body.
+	rng.randomize()
+	if mode == 1:
+		spawn_fish() # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,8 +24,13 @@ func _ready():
 
 
 func _on_PlayerDetectionArea_area_entered(area):
-	if (rng.randi_range(1,1) == 1):
-		spawn_fish()
+	if mode == 0:
+		if (rng.randi_range(1,1) == 1):
+			spawn_fish()
+	else:
+		#Fish Bait Part
+		if (rng.randi_range(1,1) == 1):
+			spawn_fish()
 		
 		
 func spawn_fish():
@@ -35,7 +44,9 @@ func spawn_fish():
 	FishData.connect("leave", fish, "left")
 	FishData.connect("catch", fish, "caught")
 	FishData.fishSpawnedNumber += 1
-	get_node("../Navigation2D/FishContainer").add_child(fish)
+	get_node("../").add_child(fish)
+	if mode == 1:
+		queue_free()
 
 func _on_PlayerDetectionArea_area_exited(area):
 	FishData.emit_signal("despawn", fishSpawnID)

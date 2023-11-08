@@ -12,6 +12,8 @@ var fishCatchable = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Line2D.add_point(Vector2(0,-9.5))
+	$Line2D.add_point(to_local(Vector2(Global.playerPosition.x + 12.5,Global.playerPosition.y + -3)))
 	$Label.visible = false
 	FishData.connect("registerFish",self,"fishRegister") # Replace with function body.
 	FishData.connect("onBobber",self,"fishOnBobber")
@@ -43,4 +45,5 @@ func _physics_process(delta):
 func _on_TimeToCatchFishTimer_timeout():
 	$Label.visible = false
 	fishCatchable = false
+	FishData.fishOnBobber = false
 	FishData.emit_signal("bobberLeft",fishID) # Replace with function body.

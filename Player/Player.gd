@@ -1,12 +1,13 @@
 extends KinematicBody2D
 onready var waterCatcher = preload("res://Fish/WaterChecker.tscn")
 onready var bobberResource = preload("res://Fish/FishBobber.tscn")
+onready var fishResource = preload("res://Fish/FishSpawner.tscn")
 export var ACCELERATION = 200
 export var SPEED = 150
 export var FRICTION = 700
 var velocity = Vector2.ZERO
 var touchingWater = true
-enum State {Catching,Fishing}
+enum State {Catching,Fishing,Bait,Flowers,Length}
 var currentState = State.Catching
 
 var catchAnimation = false
@@ -61,6 +62,7 @@ func button_check():
 		if casted == true:
 			casted = false
 			FishData.emit_signal("deleteBobber")
+			$Tools.frame = 1
 			return
 		if touchingWater == true:
 			var waterChecker = waterCatcher.instance()
@@ -72,22 +74,63 @@ func button_check():
 				fishBobber = bobberResource.instance()
 				fishBobber.global_position = get_global_mouse_position()
 				get_tree().get_current_scene().add_child(fishBobber)
+				$Tools.frame = 3
 				casted = true
+	
+	if currentState == State.Bait:
+		if touchingWater == true:
+			var waterChecker = waterCatcher.instance()
+			waterChecker.global_position = get_global_mouse_position()
+			get_tree().get_current_scene().add_child(waterChecker)
+			yield(get_tree().create_timer(0.1), "timeout")
+			if waterChecker.touchingWater == true:
+				waterChecker.queue_free()
+				Global.emit_signal("checkNavMesh", get_global_mouse_position().x,get_global_mouse_position().y)
+				yield(get_tree().create_timer(0.1), "timeout")
+				var fishPosition = Global.navTarget
+				var fishInstance = fishResource.instance()
+				fishInstance.global_position = fishPosition
+				fishInstance.mode = 1
+				get_node("../Navigation2D/FishContainer").add_child(fishInstance)
+				
 				
 				
 				
 				
 func switch_tools():
-	if currentState == State.Catching:
-		currentState = State.Fishing
+	if currentState == State.Fishing:
+		casted = false
+		FishData.emit_signal("deleteBobber")
+		$Tools.frame = 1
+	#https://www.reddit.com/r/godot/comments/14bagn1/iterating_through_enums/
+	currentState = wrapi(currentState+1,0, State.Length)
+	if currentState == State.Fishing:
+		#currentState = State.Fishing
 		bugArea.disabled = true
 		fishArea.disabled = false
 		$Tools.frame = 1
-	else:
-		currentState = State.Catching
+	if currentState == State.Catching:
+		#currentState = State.Catching
 		bugArea.disabled = false
 		fishArea.disabled = true
 		$Tools.frame = 2
+	if currentState == State.Bait:
+		if InventoryData.baitOwned != 0:
+			bugArea.disabled = true
+			fishArea.disabled = false
+			$Tools.frame = 4
+		else:
+			currentState = wrapi(currentState+1,0, State.Length)
+			switch_tools()
+	if currentState == State.Flowers:
+		if InventoryData.flowersOwned != 0:
+			bugArea.disabled = true
+			fishArea.disabled = true
+			$Tools.frame = 5
+		else:
+			currentState = wrapi(currentState+1,0, State.Length)
+			switch_tools()
+		
 		
 func _on_FishingArea_body_entered(body):
 	if "WaterTiles" in str(body):

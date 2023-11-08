@@ -3,7 +3,10 @@ extends Node2D
 var playerPosition = Vector2.ZERO
 var playerAtShop = false
 var money = 0
-# Declare member variables here. Examples:
+
+signal checkNavMesh
+
+var navTarget# Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
@@ -22,6 +25,8 @@ func save():
 	save_game.open("user://savegame.save", File.WRITE)
 	var data = {}
 	data["money"] = money
+	data["baitOwned"] = InventoryData.baitOwned
+	data["flowersOwned"] = InventoryData.flowersOwned
 	data["inventory"] = InventoryData.inventory
 	data["fishCaught"] = FishData.caughtFish
 	data["fishDonated"] = FishData.donateFish
@@ -38,6 +43,8 @@ func loading():
 	var data = JSON.parse(save_game.get_as_text()).result
 	playerPosition = Vector2(data["playerPositionX"],data["playerPositionY"])
 	InventoryData.inventory = data["inventory"]
+	InventoryData.baitOwned = data["baitOwned"]
+	InventoryData.flowersOwned = data["flowersOwned"]
 	FishData.caughtFish = data["fishCaught"]
 	FishData.donateFish = data["fishDonated"]
 	ButterflyData.caughtButterflys = data["butterfliesCaught"]

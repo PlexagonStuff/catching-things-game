@@ -17,6 +17,9 @@ var normalMode = true
 #This is just here to distinguish an open press from a closed press
 var normalInventoryOpen = false
 
+
+var baitOwned = 0
+var flowersOwned = 0
 #This so that you cannot open the encylopedia in the store
 var inStore = false
 # Declare member variables here. Examples:
