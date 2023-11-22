@@ -15,6 +15,12 @@ func _ready():
 	type = InventoryData.inventory[str(id)]["type"]
 	if type == "Bug":
 		$ButterflyIcon.frame = catalogID-1
+		$FishIcon.visible = false
+		$ButterflyIcon.visible = true
+	else: 
+		$FishIcon.frame = catalogID-1
+		$ButterflyIcon.visible = false
+		$FishIcon.visible = true
 		 # Replace with function body.
 
 

@@ -279,9 +279,6 @@ script = ExtResource( 9 )
 position = Vector2( 206, -154 )
 navpoly = SubResource( 16 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 89, -62 )
-
 [node name="Flower" parent="." instance=ExtResource( 2 )]
 position = Vector2( 226, -4 )
 
@@ -298,6 +295,7 @@ position = Vector2( 441, 151 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 154, -90 )
+zoom = Vector2( 0.8, 0.8 )
 
 [node name="FishSpawner" parent="." instance=ExtResource( 7 )]
 position = Vector2( 170, -138 )
@@ -306,3 +304,6 @@ z_index = -21
 [node name="DonateShip" parent="." instance=ExtResource( 8 )]
 position = Vector2( 488, 542 )
 scale = Vector2( 1.25, 1.25 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 89, -62 )

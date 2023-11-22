@@ -14,8 +14,7 @@ export var mode = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
-	if mode == 1:
-		spawn_fish() # Replace with function body.
+	# Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,9 +43,10 @@ func spawn_fish():
 	FishData.connect("leave", fish, "left")
 	FishData.connect("catch", fish, "caught")
 	FishData.fishSpawnedNumber += 1
-	get_node("../").add_child(fish)
-	if mode == 1:
-		queue_free()
+	get_parent().add_child(fish)
+	
 
 func _on_PlayerDetectionArea_area_exited(area):
 	FishData.emit_signal("despawn", fishSpawnID)
+	if mode == 1:
+		queue_free()

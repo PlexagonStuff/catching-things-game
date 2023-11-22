@@ -17,6 +17,7 @@ var velocity = Vector2.ZERO
 var speed = 60
 var acceleration = 10
 var stopper
+var direction = Vector2.ZERO
 onready var navagent = $NavigationAgent2D
 # Declare member variables here. Examples:
 # var a = 2
@@ -24,6 +25,7 @@ onready var navagent = $NavigationAgent2D
 
 
 func _ready():
+	navagent.set_navigation(get_parent().get_node("Navigation2D"))
 	FishData.connect("bobberLeft",self,"leave")
 	FishData.connect("catch",self,"caught")
 	rng.randomize()
@@ -45,12 +47,11 @@ func _physics_process(delta):
 	if (navagent.is_navigation_finished()):
 		return
 	stopper = 1
-	var direction = global_position.direction_to(navagent.get_next_location())
+	direction = global_position.direction_to(navagent.get_next_location())
 	var desired_velocity = direction * speed
 	var steering = (desired_velocity - velocity) * (acceleration * delta)
 	#print(steering)
 	velocity = velocity + steering
-	#print(velocity)
 	velocity = move_and_slide(velocity)
 	
 	
@@ -65,7 +66,14 @@ func catch_process():
 	
 func _on_CatchPhaseTimer_timeout():
 	currentCatchCycle +=1
-	print(currentCatchCycle) 
+	print(currentCatchCycle)
+	print(navagent.get_target_location())
+	print(navagent.get_final_location())
+	print(navagent.get_next_location())
+	print(navagent.is_target_reachable())
+	print(bobberPoint)
+	print(navagent.distance_to_target())
+	print(direction)
 	if (currentCatchCycle < (catchCycles + 1)):
 		if ((currentCatchCycle % 2) != 0):
 			target_point = Vector2(bobberPoint.x + rng.randi_range(-50,50), bobberPoint.y + rng.randi_range(-50,50))
@@ -88,10 +96,11 @@ func despawned(fishID):
 	if (fishID == id):
 		queue_free()
 		
-func caught(id, catalogID):
-	print("You caught a thing!")
-	CameraData.emit_signal("changeCameraState", CameraData.ZOOMONPLAYER)
-	queue_free()
+func caught(fishID, catalogID):
+	if (fishID == id):
+		print("You caught a thing!")
+		CameraData.emit_signal("changeCameraState", CameraData.ZOOMONPLAYER)
+		queue_free()
 	
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Leave":

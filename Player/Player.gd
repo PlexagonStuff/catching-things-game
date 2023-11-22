@@ -98,6 +98,7 @@ func button_check():
 				
 				
 func switch_tools():
+	print(currentState)
 	if currentState == State.Fishing:
 		casted = false
 		FishData.emit_signal("deleteBobber")
@@ -120,7 +121,6 @@ func switch_tools():
 			fishArea.disabled = false
 			$Tools.frame = 4
 		else:
-			currentState = wrapi(currentState+1,0, State.Length)
 			switch_tools()
 	if currentState == State.Flowers:
 		if InventoryData.flowersOwned != 0:
@@ -128,7 +128,6 @@ func switch_tools():
 			fishArea.disabled = true
 			$Tools.frame = 5
 		else:
-			currentState = wrapi(currentState+1,0, State.Length)
 			switch_tools()
 		
 		

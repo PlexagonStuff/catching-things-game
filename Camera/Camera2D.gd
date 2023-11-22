@@ -83,7 +83,7 @@ func _on_Tween_tween_completed(object, key):
 			cameraState = "followPlayer"
 			var tween = get_node("Tween")
 			tween.interpolate_property(self, "zoom",
-			self.zoom, Vector2(1.25,1.25), 3,
+			self.zoom, Vector2(0.9,0.9), 3,
 			Tween.TRANS_EXPO, Tween.EASE_OUT)
 			tween.start()
 			get_tree().paused = false
