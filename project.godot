@@ -22,7 +22,7 @@ Dialogue="*res://Global/Dialogue.gd"
 CatchManager="*res://Global/CatchManager.gd"
 FishData="*res://Fish/FishData.gd"
 InventoryData="*res://Global/InventoryData.gd"
-AnimalPediaData="*res://AnimalPediaData.gd"
+AnimalPediaData="*res://Global/AnimalPediaData.gd"
 
 [display]
 

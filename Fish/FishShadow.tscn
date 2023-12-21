@@ -34,13 +34,12 @@ tracks/0/keys = {
 }
 
 [node name="FishShadow" type="KinematicBody2D"]
-position = Vector2( -0.105456, 0.15625 )
+scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 2 )
 
 [node name="Fishshadow" type="Sprite" parent="."]
-position = Vector2( -15.3967, 0.0936396 )
+position = Vector2( -7.89454, 0.84375 )
 rotation = 1.5708
-scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 hframes = 2
 frame = 1

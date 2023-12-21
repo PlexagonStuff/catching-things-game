@@ -28,11 +28,14 @@ func _process(delta):
 		if InventoryData.normalMode == true and InventoryData.inStore == false and $CanvasLayer/Inventory.visible == false:
 			if AnimalPediaData.open == false:
 				AnimalPediaData.emit_signal("showPedia",AnimalPediaData.Tab.Butterfly)
+				get_tree().paused = true
 				$CanvasLayer/AnimalPedia.visible = true
 				AnimalPediaData.open = true
 			else:
 				$CanvasLayer/AnimalPedia.visible = false
 				AnimalPediaData.open = false
+				get_tree().paused = false
+			
 				
 				
 func showInventory(mode):
