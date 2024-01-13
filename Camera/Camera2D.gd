@@ -13,10 +13,15 @@ func _ready():
 	CameraData.connect("changeCameraState", self, "changeCameraState")
 	InventoryData.connect("showInventory",self,"showInventory")
 	InventoryData.connect("hideInventory",self,"hideInventory")
+	InventoryData.connect("showItemShop",self,"showItemShop")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("inventory"):
+		if InventoryData.shopOpen == true:
+			InventoryData.shopOpen = false
+			$CanvasLayer/ShopInterface.visible = false
+			get_tree().paused = false
 		if InventoryData.normalMode == true and $CanvasLayer/AnimalPedia.visible == false:
 			if InventoryData.normalInventoryOpen == false:
 				InventoryData.emit_signal("showInventory",InventoryData.Mode.Normal)
@@ -37,6 +42,11 @@ func _process(delta):
 				get_tree().paused = false
 			
 				
+				
+func showItemShop():
+	InventoryData.shopOpen = true
+	$CanvasLayer/ShopInterface.visible = true
+	get_tree().paused = true
 				
 func showInventory(mode):
 	$CanvasLayer/Inventory.visible = true

@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Camera/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://UI/DialogueBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/AnimalPedia.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Shop/ShopInterface.tscn" type="PackedScene" id=5]
 
 [node name="Camera2D" type="Camera2D"]
 pause_mode = 2
-position = Vector2( 165, 90 )
+position = Vector2( 165, 91 )
 current = true
 smoothing_speed = 2.0
 script = ExtResource( 1 )
@@ -37,6 +38,10 @@ scale = Vector2( 0.5, 0.5 )
 [node name="AnimalPedia" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 160, 86 )
+
+[node name="ShopInterface" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 61, 34 )
 
 [node name="Tween" type="Tween" parent="."]
 pause_mode = 2

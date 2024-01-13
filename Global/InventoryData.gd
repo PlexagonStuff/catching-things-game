@@ -5,6 +5,8 @@ signal showInventory
 signal hideInventory
 signal renderInventory
 
+signal showItemShop
+
 enum Mode {Normal, Release, Sell, Donate}
 
 var extraBox = false
@@ -17,6 +19,8 @@ var normalMode = true
 #This is just here to distinguish an open press from a closed press
 var normalInventoryOpen = false
 
+#This is for the item shop
+var shopOpen = false
 
 var baitOwned = 0
 var flowersOwned = 0

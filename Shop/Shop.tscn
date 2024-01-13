@@ -33,7 +33,7 @@ margin_top = -35.0
 margin_right = 26.0
 margin_bottom = -21.0
 custom_fonts/font = SubResource( 1 )
-text = "Otter's Pet Selling Emporium"
+text = "Otter's Ingredient Emporium"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
