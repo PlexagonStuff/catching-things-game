@@ -6,7 +6,8 @@ var money = 0
 
 signal checkNavMesh
 
-var navTarget# Declare member variables here. Examples:
+var navTarget
+var navLocation# Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 

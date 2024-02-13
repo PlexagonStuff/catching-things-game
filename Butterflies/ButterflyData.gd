@@ -24,26 +24,26 @@ var donateButterflys = []
 # var a = 2
 # var b = "text"
 var butterflyStats = {
-	"1":{"name":"Template Butterfly", "speed":40, "acceleration":150},
-	"2":{"name":"Monarch Butterfly", "speed":40, "acceleration":150},
-	"3":{"name":"Agrias Butterfly", "speed":60, "acceleration":150},
-	"4":{"name":"Eastern Tiger Swallowtail", "speed":40, "acceleration":150},
-	"5":{"name":"Cabbage White Butterfly", "speed":40, "acceleration":150},
-	"6":{"name":"Common Blue Butterfly", "speed":40, "acceleration":150},
-	"7":{"name":"Falcate Orangetip", "speed":40, "acceleration":150},
-	"8":{"name":"Grey Hairstreak", "speed":40, "acceleration":150},
-	"9":{"name":"Common Sootywing", "speed":40, "acceleration":150},
-	"10":{"name":"Milbert's Tortoiseshell", "speed":40, "acceleration":150},
-	"11":{"name":"Common Bluebottle", "speed":40, "acceleration":150},
-	"12":{"name":"Old World Swallowtail", "speed":40, "acceleration":150},
-	"13":{"name":"Peacock Butterfly", "speed":40, "acceleration":150},
-	"14":{"name":"Rajah Brooke's Birdwing", "speed":40, "acceleration":150},
-	"15":{"name":"Great Purple Emperor", "speed":40, "acceleration":150},
-	"16":{"name":"Queen Alexandria's Birdwing", "speed":40, "acceleration":150},
-	"17":{"name":"Chinese Peacock Butterfly", "speed":40, "acceleration":150},
-	"18":{"name":"Blue Morphos Butterfly", "speed":40, "acceleration":150},
-	"19":{"name":"Clouded Yellow Butterfly", "speed":40, "acceleration":150},
-	"20":{"name":"Great Eggfly", "speed":40, "acceleration":150}
+	"1":{"name":"Template Butterfly", "speed":40, "acceleration":150,"price":75},
+	"2":{"name":"Monarch Butterfly", "speed":40, "acceleration":150,"price":100},
+	"3":{"name":"Agrias Butterfly", "speed":60, "acceleration":150,"price":150},
+	"4":{"name":"Eastern Tiger Swallowtail", "speed":40, "acceleration":150,"price":150},
+	"5":{"name":"Cabbage White Butterfly", "speed":40, "acceleration":150,"price":75},
+	"6":{"name":"Common Blue Butterfly", "speed":40, "acceleration":150,"price":75},
+	"7":{"name":"Falcate Orangetip", "speed":40, "acceleration":150,"price":100},
+	"8":{"name":"Grey Hairstreak", "speed":40, "acceleration":150,"price":100},
+	"9":{"name":"Common Sootywing", "speed":40, "acceleration":150,"price":100},
+	"10":{"name":"Milbert's Tortoiseshell", "speed":40, "acceleration":150,"price":100},
+	"11":{"name":"Common Bluebottle", "speed":40, "acceleration":150,"price":100},
+	"12":{"name":"Old World Swallowtail", "speed":40, "acceleration":150,"price":200},
+	"13":{"name":"Peacock Butterfly", "speed":40, "acceleration":150,"price":200},
+	"14":{"name":"Rajah Brooke's Birdwing", "speed":40, "acceleration":150,"price":150},
+	"15":{"name":"Great Purple Emperor", "speed":40, "acceleration":150,"price":175},
+	"16":{"name":"Queen Alexandria's Birdwing", "speed":40, "acceleration":150,"price":2000},
+	"17":{"name":"Chinese Peacock Butterfly", "speed":40, "acceleration":150,"price":200},
+	"18":{"name":"Blue Morphos Butterfly", "speed":40, "acceleration":150,"price":100},
+	"19":{"name":"Clouded Yellow Butterfly", "speed":40, "acceleration":150,"price":75},
+	"20":{"name":"Great Eggfly", "speed":40, "acceleration":150,"price":175}
 }
 #Min scale is 0.3
 var butterflyCatchData = {

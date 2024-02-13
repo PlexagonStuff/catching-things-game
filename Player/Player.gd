@@ -91,6 +91,7 @@ func button_check():
 				var fishInstance = fishResource.instance()
 				fishInstance.global_position = fishPosition
 				fishInstance.mode = 1
+				fishInstance.location = Global.navLocation
 				get_node("../Navigation2D/FishContainer").add_child(fishInstance)
 				
 				
