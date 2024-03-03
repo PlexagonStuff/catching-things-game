@@ -36,6 +36,11 @@ func _on_TextureButton_pressed():
 		InventoryData.normalMode = true
 	if mode == InventoryData.Mode.Sell:
 		#MAKE SURE TO ADD THE WHOLE EARNING MONEY PART HERE
+		var catalogID = InventoryData.inventory[str(id)]["catalogID"]
+		if type == "Bug":
+			Global.money += ButterflyData.butterflyStats[str(catalogID)]["price"]
+		else:
+			Global.money += FishData.fishStats[str(catalogID)]["price"]
 		InventoryData.shiftInventory(id)
 		InventoryData.emit_signal("hideInventory")
 		InventoryData.emit_signal("showInventory",InventoryData.Mode.Sell)

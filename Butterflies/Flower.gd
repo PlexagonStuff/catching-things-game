@@ -52,7 +52,7 @@ func spawn_butterfly():
 	ButterflyData.connect("leave", butterfly, "left")
 	ButterflyData.connect("catch", butterfly, "caught")
 	ButterflyData.bugSpawnedNumber += 1
-	get_node("../ButterflyContainer").add_child(butterfly)
+	get_node("../../ButterflyContainer").add_child(butterfly)
 
 func _on_PlayerDetectionArea_area_exited(area):
 	ButterflyData.emit_signal("despawn", butterflySpawnID) # Replace with function body.

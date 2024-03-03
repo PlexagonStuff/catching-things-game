@@ -17,9 +17,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$CanvasLayer/Money.text = str(Global.money)
 	if Input.is_action_just_pressed("inventory"):
 		if InventoryData.shopOpen == true:
 			InventoryData.shopOpen = false
+			InventoryData.normalMode = true
+			InventoryData.inStore = false
 			$CanvasLayer/ShopInterface.visible = false
 			get_tree().paused = false
 		if InventoryData.normalMode == true and $CanvasLayer/AnimalPedia.visible == false:
@@ -30,6 +33,11 @@ func _process(delta):
 				InventoryData.emit_signal("hideInventory")
 				InventoryData.normalInventoryOpen = false
 	if Input.is_action_just_pressed("encyclopedia"):
+		print(str(InventoryData.normalMode))
+		print(str(InventoryData.inStore))
+		
+		print(str($CanvasLayer/Inventory.visible))
+		
 		if InventoryData.normalMode == true and InventoryData.inStore == false and $CanvasLayer/Inventory.visible == false:
 			if AnimalPediaData.open == false:
 				AnimalPediaData.emit_signal("showPedia",AnimalPediaData.Tab.Butterfly)
@@ -65,6 +73,8 @@ func _physics_process(delta):
 	
 	if cameraState == "followPlayer":
 		global_position = Global.playerPosition
+	if cameraState == "followBobber":
+		global_position = Global.bobberPosition
 	elif cameraState == "zoomPlayer":
 		pass
 		#get_tree().paused = true
@@ -77,6 +87,7 @@ func _physics_process(delta):
 func changeCameraState(var state):
 	cameraState = state
 	if cameraState == "zoomPlayer":
+		global_position = Global.playerPosition
 		yield(get_tree().create_timer(0.05), "timeout")
 		$CanvasLayer/DialogueBox.visible = true
 		get_tree().paused = true

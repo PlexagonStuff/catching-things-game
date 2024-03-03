@@ -67,7 +67,7 @@ func showAnimalLayout(mode,animalID):
 			$AnimalLayout/Bug.visible = true
 			$AnimalLayout/BugNo.visible = false
 			$AnimalLayout/Name.text = "Name: " + ButterflyData.butterflyStats[str(animalID)]["name"]
-			$AnimalLayout/Price.text = "Price: " + "???"
+			$AnimalLayout/Price.text = "Price: " + str(ButterflyData.butterflyStats[str(animalID)]["price"])
 			$AnimalLayout/Rarity.text = "Rarity: " + rarity
 		
 	else:
@@ -127,7 +127,8 @@ func showAnimalLayout(mode,animalID):
 		if rarityCounter == 1:
 			rarity = "Legendary"
 		rarityCounter = 0
-		
+		if animalID == 5:
+			rarity = "Common"
 		var counter = 0
 		for bugs in FishData.caughtFish:
 			if bugs == animalID:
@@ -144,7 +145,7 @@ func showAnimalLayout(mode,animalID):
 			$AnimalLayout/FishNo.visible = false
 			$AnimalLayout/Fish.visible = true
 			$AnimalLayout/Name.text = "Name: " + FishData.fishStats[str(animalID)]["name"]
-			$AnimalLayout/Price.text = "Price: " + "???"
+			$AnimalLayout/Price.text = "Price: " + str(FishData.fishStats[str(animalID)]["price"])
 			$AnimalLayout/Rarity.text = "Rarity: " + rarity
 			$AnimalLayout/FishSize.text = "Fish Size: " + size
 

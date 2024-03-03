@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Butterflies/Flower.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Shop/DonateShip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Navigation2D.gd" type="Script" id=9]
 [ext_resource path="res://Shop/ItemShop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World.gd" type="Script" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -265,6 +266,7 @@ outlines = [ PoolVector2Array( -85, 729, -154, 737, -192, 704, -200, 577, -257, 
 
 [node name="World" type="Node2D"]
 position = Vector2( 0, -1 )
+script = ExtResource( 11 )
 
 [node name="GroundTiles" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -307,17 +309,20 @@ navpoly = SubResource( 22 )
 [node name="NavigationPolygonInstance4" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = SubResource( 23 )
 
-[node name="Flower" parent="." instance=ExtResource( 2 )]
-position = Vector2( 226, -4 )
+[node name="FlowerContainer" type="Node" parent="."]
 
-[node name="Flower2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 470, -137 )
+[node name="Flower" parent="FlowerContainer" instance=ExtResource( 2 )]
+position = Vector2( 226, -5 )
+z_as_relative = false
 
-[node name="Flower3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 56, 175 )
+[node name="Flower2" parent="FlowerContainer" instance=ExtResource( 2 )]
+position = Vector2( 470, -138 )
 
-[node name="Flower4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 766, 320 )
+[node name="Flower3" parent="FlowerContainer" instance=ExtResource( 2 )]
+position = Vector2( 56, 174 )
+
+[node name="Flower4" parent="FlowerContainer" instance=ExtResource( 2 )]
+position = Vector2( 766, 319 )
 
 [node name="ButterflyContainer" type="Node" parent="."]
 
@@ -341,9 +346,75 @@ z_index = -21
 position = Vector2( -125, 145 )
 z_index = -21
 
+[node name="FishSpawner5" parent="." instance=ExtResource( 7 )]
+position = Vector2( -223, -244 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner6" parent="." instance=ExtResource( 7 )]
+position = Vector2( 153, 399 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner7" parent="." instance=ExtResource( 7 )]
+position = Vector2( 433, 440 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner8" parent="." instance=ExtResource( 7 )]
+position = Vector2( 954, 417 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner9" parent="." instance=ExtResource( 7 )]
+position = Vector2( -261, 618 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner10" parent="." instance=ExtResource( 7 )]
+position = Vector2( -432, 163 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner11" parent="." instance=ExtResource( 7 )]
+position = Vector2( 884, -44 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner12" parent="." instance=ExtResource( 7 )]
+position = Vector2( 682, -326 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner13" parent="." instance=ExtResource( 7 )]
+position = Vector2( 680, -630 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner14" parent="." instance=ExtResource( 7 )]
+position = Vector2( 390, -644 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner15" parent="." instance=ExtResource( 7 )]
+position = Vector2( 134, -642 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner16" parent="." instance=ExtResource( 7 )]
+position = Vector2( -178, -680 )
+z_index = -21
+location = 1
+
+[node name="FishSpawner17" parent="." instance=ExtResource( 7 )]
+position = Vector2( -178, -382 )
+z_index = -21
+location = 1
+
 [node name="DonateShip" parent="." instance=ExtResource( 8 )]
 position = Vector2( 569, 701 )
 scale = Vector2( 1.25, 1.25 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 89, -62 )
+z_index = 2

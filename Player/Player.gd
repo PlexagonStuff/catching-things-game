@@ -2,6 +2,7 @@ extends KinematicBody2D
 onready var waterCatcher = preload("res://Fish/WaterChecker.tscn")
 onready var bobberResource = preload("res://Fish/FishBobber.tscn")
 onready var fishResource = preload("res://Fish/FishSpawner.tscn")
+onready var flowerResource = preload("res://Butterflies/Flower.tscn")
 export var ACCELERATION = 200
 export var SPEED = 150
 export var FRICTION = 700
@@ -61,6 +62,7 @@ func button_check():
 	if currentState == State.Fishing:
 		if casted == true:
 			casted = false
+			CameraData.emit_signal("changeCameraState","followPlayer")
 			FishData.emit_signal("deleteBobber")
 			$Tools.frame = 1
 			return
@@ -73,26 +75,46 @@ func button_check():
 				waterChecker.queue_free()
 				fishBobber = bobberResource.instance()
 				fishBobber.global_position = get_global_mouse_position()
+				Global.bobberPosition = get_global_mouse_position()
+				CameraData.emit_signal("changeCameraState","followBobber")
 				get_tree().get_current_scene().add_child(fishBobber)
 				$Tools.frame = 3
 				casted = true
 	
 	if currentState == State.Bait:
-		if touchingWater == true:
+		if InventoryData.baitOwned > 0:
+			if touchingWater == true:
+				var waterChecker = waterCatcher.instance()
+				waterChecker.global_position = get_global_mouse_position()
+				get_tree().get_current_scene().add_child(waterChecker)
+				yield(get_tree().create_timer(0.1), "timeout")
+				if waterChecker.touchingWater == true:
+					waterChecker.queue_free()
+					Global.emit_signal("checkNavMesh", get_global_mouse_position().x,get_global_mouse_position().y)
+					yield(get_tree().create_timer(0.1), "timeout")
+					var fishPosition = Global.navTarget
+					var fishInstance = fishResource.instance()
+					fishInstance.global_position = fishPosition
+					fishInstance.mode = 1
+					fishInstance.location = Global.navLocation
+					InventoryData.baitOwned -= 1
+					get_node("../Navigation2D/FishContainer").add_child(fishInstance)
+	if currentState == State.Flowers:
+		if InventoryData.flowersOwned > 0:
 			var waterChecker = waterCatcher.instance()
 			waterChecker.global_position = get_global_mouse_position()
 			get_tree().get_current_scene().add_child(waterChecker)
 			yield(get_tree().create_timer(0.1), "timeout")
-			if waterChecker.touchingWater == true:
+			if waterChecker.touchingWater == false:
 				waterChecker.queue_free()
-				Global.emit_signal("checkNavMesh", get_global_mouse_position().x,get_global_mouse_position().y)
-				yield(get_tree().create_timer(0.1), "timeout")
-				var fishPosition = Global.navTarget
-				var fishInstance = fishResource.instance()
-				fishInstance.global_position = fishPosition
-				fishInstance.mode = 1
-				fishInstance.location = Global.navLocation
-				get_node("../Navigation2D/FishContainer").add_child(fishInstance)
+				var flowerPosition = get_global_mouse_position()
+				var flowerInstance = flowerResource.instance()
+				flowerInstance.global_position = get_global_mouse_position()
+				InventoryData.flowersOwned -= 1
+				Global.flowersPlaced["num"] += 1
+				Global.flowersPlaced[str(Global.flowersPlaced["num"])] = {"x":flowerPosition.x,"y":flowerPosition.y}
+				get_node("../FlowerContainer").add_child(flowerInstance)
+		
 				
 				
 				

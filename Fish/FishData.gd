@@ -71,7 +71,7 @@ var fishStats = {
 	"29":{"name":"Sea Bass", "catchTime":0.5,"size":3,"price":100},
 	"30":{"name":"Red Snapper", "catchTime":0.5,"size":3,"price":100},
 	"31":{"name":"Mahi-Mahi", "catchTime":0.5,"size":4,"price":200},
-	"32":{"name":"Leatherback", "catchTime":0.5,"size":4,"price":300},
+	"32":{"name":"Leatherback", "catchTime":0.5,"size":4,"price":1000},
 	"33":{"name":"Sea Turtle", "catchTime":0.5,"size":4,"price":200},
 	"34":{"name":"Pufferfish", "catchTime":0.5,"size":2,"price":125},
 	"35":{"name":"Manta Ray", "catchTime":0.5,"size":4,"price":175},

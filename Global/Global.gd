@@ -1,6 +1,7 @@
 extends Node2D
 
 var playerPosition = Vector2.ZERO
+var bobberPosition = Vector2.ZERO
 var playerAtShop = false
 var money = 0
 
@@ -8,6 +9,8 @@ signal checkNavMesh
 
 var navTarget
 var navLocation# Declare member variables here. Examples:
+	
+var flowersPlaced = {"num":0}
 # var a = 2
 # var b = "text"
 
@@ -35,6 +38,7 @@ func save():
 	data["butterfliesDonated"] = ButterflyData.donateButterflys
 	data["playerPositionX"] = playerPosition.x
 	data["playerPositionY"] = playerPosition.y
+	data["flowersPlaced"] = flowersPlaced
 	save_game.store_line(to_json(data))
 	save_game.close()
 	
@@ -51,6 +55,7 @@ func loading():
 	ButterflyData.caughtButterflys = data["butterfliesCaught"]
 	ButterflyData.donateButterflys = data["butterfliesDonated"]
 	money = data["money"]
+	flowersPlaced = data["flowersPlaced"]
 	save_game.close()
 	get_tree().change_scene("res://World.tscn")
 	

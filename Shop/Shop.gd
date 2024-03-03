@@ -19,6 +19,7 @@ func _ready():
 func _on_ShopEntrance_area_entered(area):
 	InventoryData.emit_signal("showInventory",InventoryData.Mode.Sell)
 	InventoryData.inStore = true
+	InventoryData.shopOpen = true
 	Dialogue.emit_signal("sendDialogue","Welcome to the Pet Store...","We want your critters! Press E to exit at any time") # Replace with function body.
 	InventoryData.normalInventoryOpen = true
 
