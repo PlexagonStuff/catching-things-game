@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://image.png" type="Texture" id=1]
 [ext_resource path="res://UI/LilitaOne-Regular.ttf" type="DynamicFontData" id=2]
@@ -26,6 +26,11 @@ anti_aliasing = false
 
 [sub_resource type="DynamicFont" id=3]
 size = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [node name="TitleScreen" type="Node2D"]
@@ -83,6 +88,14 @@ text = "Load Game"
 [node name="LoadGame" type="TextureButton" parent="LoadGameButton"]
 margin_right = 93.0
 margin_bottom = 23.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 90.0
+margin_top = 161.0
+margin_right = 226.0
+margin_bottom = 180.0
+custom_fonts/font = SubResource( 4 )
+text = "Sounds by ZapSplat"
 
 [connection signal="pressed" from="NewGameButton/NewGame" to="." method="_on_NewGame_pressed"]
 [connection signal="pressed" from="LoadGameButton/LoadGame" to="." method="_on_LoadGame_pressed"]
