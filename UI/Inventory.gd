@@ -17,6 +17,13 @@ func renderInventory(mode):
 			n.queue_free()
 	for n in get_children():
 		print(n.name)
+	
+	if mode == InventoryData.Mode.Normal:
+		$OtherItems.visible = true
+		$OtherItems/FishBaitCounter.text =  str(InventoryData.baitOwned)
+		$OtherItems/FlowerCounter.text = str(InventoryData.flowersOwned)
+	else:
+		$OtherItems.visible = false
 		#remove_child(n)
 		#n.queue_free()
 	$InventoryBoxPlacer.position = Vector2(-81,-27)

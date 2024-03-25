@@ -11,6 +11,8 @@ var type
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if mode == InventoryData.Mode.Sell:
+		get_parent().get_node("TitleCard").get_node("ItemName").text = "Money: " + str(Global.money)
 	var catalogID = InventoryData.inventory[str(id)]["catalogID"]
 	type = InventoryData.inventory[str(id)]["type"]
 	if type == "Bug":
@@ -72,10 +74,23 @@ func _on_TextureButton_pressed():
 			
 			
 func _on_TextureButton_mouse_entered():
-	get_parent().get_node("TitleCard").get_node("ItemName").text = InventoryData.inventory[str(id)]["name"] # Replace with function body.
+	var catalogID = InventoryData.inventory[str(id)]["catalogID"]
 	if mode == InventoryData.Mode.Sell:
-		Dialogue.emit_signal("sendDialogue","","This is placeholder sell text")
+		get_parent().get_node("TitleCard").get_node("ItemName").text = "Money: " + str(Global.money)
+	else:
+		get_parent().get_node("TitleCard").get_node("ItemName").text = InventoryData.inventory[str(id)]["name"]
+	 # Replace with function body.
+	if mode == InventoryData.Mode.Sell:
+		var sellString
+		if type == "Bug":
+			sellString = "A " + InventoryData.inventory[str(id)]["name"] + " sells for " + str(ButterflyData.butterflyStats[str(catalogID)]["price"])
+		else:
+			sellString = "A " + InventoryData.inventory[str(id)]["name"] + " sells for " + str(FishData.fishStats[str(catalogID)]["price"])
+		Dialogue.emit_signal("sendDialogue","",sellString)
 
 func _on_TextureButton_mouse_exited():
-	get_parent().get_node("TitleCard").get_node("ItemName").text = ""
+	if mode == InventoryData.Mode.Sell:
+		get_parent().get_node("TitleCard").get_node("ItemName").text = "Money: " + str(Global.money)
+	else:
+		get_parent().get_node("TitleCard").get_node("ItemName").text = ""
 		

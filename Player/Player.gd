@@ -63,9 +63,11 @@ func button_check():
 		if casted == true:
 			casted = false
 			CameraData.emit_signal("changeCameraState","followPlayer")
+			catchAnimation = false
 			FishData.emit_signal("deleteBobber")
 			$Tools.frame = 1
 			return
+		#$Rod.play()
 		if touchingWater == true:
 			var waterChecker = waterCatcher.instance()
 			waterChecker.global_position = get_global_mouse_position()
@@ -77,6 +79,7 @@ func button_check():
 				fishBobber.global_position = get_global_mouse_position()
 				Global.bobberPosition = get_global_mouse_position()
 				CameraData.emit_signal("changeCameraState","followBobber")
+				catchAnimation = false
 				get_tree().get_current_scene().add_child(fishBobber)
 				$Tools.frame = 3
 				casted = true
@@ -98,7 +101,10 @@ func button_check():
 					fishInstance.mode = 1
 					fishInstance.location = Global.navLocation
 					InventoryData.baitOwned -= 1
+					if InventoryData.baitOwned < 0:
+						InventoryData.baitOwned = 0;
 					get_node("../Navigation2D/FishContainer").add_child(fishInstance)
+					
 	if currentState == State.Flowers:
 		if InventoryData.flowersOwned > 0:
 			var waterChecker = waterCatcher.instance()
@@ -111,9 +117,14 @@ func button_check():
 				var flowerInstance = flowerResource.instance()
 				flowerInstance.global_position = get_global_mouse_position()
 				InventoryData.flowersOwned -= 1
-				Global.flowersPlaced["num"] += 1
+				if InventoryData.flowersOwned < 0:
+						InventoryData.flowersOwned = 0;
+				Global.flowersPlaced["num"] += 1    		
 				Global.flowersPlaced[str(Global.flowersPlaced["num"])] = {"x":flowerPosition.x,"y":flowerPosition.y}
 				get_node("../FlowerContainer").add_child(flowerInstance)
+	if currentState == State.Catching:
+		pass
+		#$Net.play()
 		
 				
 				
@@ -161,3 +172,11 @@ func _on_FishingArea_body_entered(body):
 
 func _on_FishingArea_body_exited(body):
 	touchingWater = false # Replace with function body.
+
+
+func _on_Rod_finished():
+	$Rod.stop() # Replace with function body.
+
+
+func _on_Net_finished():
+	$Net.stop() # Replace with function body.

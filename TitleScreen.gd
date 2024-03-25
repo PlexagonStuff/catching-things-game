@@ -8,7 +8,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.target_fps = 60 # Replace with function body.
+	Engine.target_fps = 60
+	 # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,4 +24,4 @@ func _on_LoadGame_pressed():
 
 
 func _on_NewGame_pressed():
-	get_tree().change_scene("res://World.tscn") # Replace with function body.
+	get_tree().change_scene("res://VideoPlayer.tscn") # Replace with function body.

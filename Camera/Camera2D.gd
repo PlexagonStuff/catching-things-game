@@ -48,6 +48,10 @@ func _process(delta):
 				$CanvasLayer/AnimalPedia.visible = false
 				AnimalPediaData.open = false
 				get_tree().paused = false
+	if Input.is_action_just_pressed("settings"):
+		if !($CanvasLayer/AnimalPedia.visible == true or $CanvasLayer/Inventory.visible == true):
+			$CanvasLayer/Settings.visible = !$CanvasLayer/Settings.visible
+			get_tree().paused = $CanvasLayer/Settings.visible
 			
 				
 				

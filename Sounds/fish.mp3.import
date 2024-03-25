@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fish.mp3-f33ad7c5d244cdd6da4d3163f686c928.mp3str"
+
+[deps]
+
+source_file="res://Sounds/fish.mp3"
+dest_files=[ "res://.import/fish.mp3-f33ad7c5d244cdd6da4d3163f686c928.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

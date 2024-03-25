@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/naturalistpig.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Player/Walk.tres" type="Animation" id=4]
 [ext_resource path="res://CatchingArea/Circles.png" type="Texture" id=5]
 [ext_resource path="res://Player/tools.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/net.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/fish.mp3" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Catch"
@@ -167,5 +169,13 @@ texture = ExtResource( 6 )
 hframes = 6
 frame = 2
 
+[node name="Net" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="Rod" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
 [connection signal="body_entered" from="FishingArea" to="." method="_on_FishingArea_body_entered"]
 [connection signal="body_exited" from="FishingArea" to="." method="_on_FishingArea_body_exited"]
+[connection signal="finished" from="Net" to="." method="_on_Net_finished"]
+[connection signal="finished" from="Rod" to="." method="_on_Rod_finished"]

@@ -36,9 +36,11 @@ func save():
 	data["fishDonated"] = FishData.donateFish
 	data["butterfliesCaught"] = ButterflyData.caughtButterflys
 	data["butterfliesDonated"] = ButterflyData.donateButterflys
+	data["sound"] = Settings.sound
 	data["playerPositionX"] = playerPosition.x
 	data["playerPositionY"] = playerPosition.y
 	data["flowersPlaced"] = flowersPlaced
+	
 	save_game.store_line(to_json(data))
 	save_game.close()
 	
@@ -54,6 +56,7 @@ func loading():
 	FishData.donateFish = data["fishDonated"]
 	ButterflyData.caughtButterflys = data["butterfliesCaught"]
 	ButterflyData.donateButterflys = data["butterfliesDonated"]
+	Settings.sound = data["sound"]
 	money = data["money"]
 	flowersPlaced = data["flowersPlaced"]
 	save_game.close()

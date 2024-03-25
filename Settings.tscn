@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://UI/NotoEmoji-VariableFont_wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/LilitaOne-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://SettingsScreen.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 8
+outline_size = 1
+outline_color = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+outline_size = 1
+outline_color = Color( 0.0470588, 0.0313726, 0.0313726, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Settings" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 97.0
+margin_top = 2.0
+margin_right = 242.0
+margin_bottom = 179.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 136.0
+margin_top = 5.0
+margin_right = 193.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 2 )
+text = "Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 135.0
+margin_top = 26.0
+margin_right = 194.0
+margin_bottom = 66.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 3 )
+text = "🔊"
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 24.0
+margin_top = 10.0
+margin_right = 62.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = ": True"
+
+[node name="Controls" type="Label" parent="."]
+margin_left = 120.0
+margin_top = 67.0
+margin_right = 218.0
+margin_bottom = 127.0
+custom_fonts/font = SubResource( 5 )
+text = "Controls:
+ WASD->Move
+LMB->Actions
+RMB->Switch Items
+E->Inventory
+Q->Encyclopedia
+Esc->Settings
+"
+align = 1
+
+[node name="LinkButton" type="LinkButton" parent="."]
+margin_left = 138.0
+margin_top = 158.0
+margin_right = 207.0
+margin_bottom = 177.0
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Exit Game"
+underline = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 135.0
+margin_top = 35.0
+margin_right = 199.0
+margin_bottom = 59.0
+
+[connection signal="pressed" from="LinkButton" to="." method="_on_LinkButton_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
